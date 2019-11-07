@@ -1,5 +1,7 @@
 package com.tjclawson.javaorders.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +28,11 @@ public class Customer {
     //many to one
     @ManyToOne
     @JoinColumn(name = "agentcode", nullable = false)
-    private long agentcode;
+    @JsonIgnoreProperties("customers")
+    private Agent agent;
 
-    @OneToMany(mappedBy = "custcode", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("customer")
     private List<Order> orders = new ArrayList<>();
 
     public Customer() {
@@ -44,7 +48,7 @@ public class Customer {
                     double paymentamt,
                     double outstandingamt,
                     String phone,
-                    long agentcode) {
+                    Agent agent) {
         this.custname = custname;
         this.custcity = custcity;
         this.workingarea = workingarea;
@@ -55,7 +59,7 @@ public class Customer {
         this.paymentamt = paymentamt;
         this.outstandingamt = outstandingamt;
         this.phone = phone;
-        this.agentcode = agentcode;
+        this.agent = agent;
     }
 
     public long getCustcode() {
@@ -146,12 +150,12 @@ public class Customer {
         this.phone = phone;
     }
 
-    public long getAgentcode() {
-        return agentcode;
+    public Agent getAgent() {
+        return agent;
     }
 
-    public void setAgentcode(long agentcode) {
-        this.agentcode = agentcode;
+    public void setAgent(Agent agent) {
+        this.agent = agent;
     }
 
     public List<Order> getOrders() {
