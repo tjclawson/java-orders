@@ -30,7 +30,8 @@ public class Order {
 
     private String orderdescription;
 
-    @ManyToMany(mappedBy = "orders", cascade = CascadeType.REMOVE)
+    @ManyToMany
+    @JoinTable(name = "orderspayments", joinColumns = @JoinColumn(name = "ordnum"), inverseJoinColumns = @JoinColumn(name = "paymentid"))
     @JsonIgnoreProperties("orders")
     private List<Payment> payments = new ArrayList<>();
 

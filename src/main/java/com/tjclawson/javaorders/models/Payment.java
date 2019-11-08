@@ -17,9 +17,8 @@ public class Payment {
     @Column(nullable = false)
     private String type;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "orderspayments", joinColumns = @JoinColumn(name = "paymentid"), inverseJoinColumns = @JoinColumn(name = "ordnum"))
-    @JsonIgnoreProperties("orders")
+    @ManyToMany(mappedBy = "payments")
+    @JsonIgnoreProperties("payments")
     List<Order> orders = new ArrayList<>();
 
     public Payment() {
