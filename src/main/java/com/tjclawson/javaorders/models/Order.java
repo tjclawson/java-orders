@@ -24,6 +24,7 @@ public class Order {
     private String orderdescription;
 
     @ManyToMany(mappedBy = "orders")
+    @JsonIgnoreProperties("orders")
     private List<Payment> payments = new ArrayList<>();
 
     public Order() {
@@ -82,5 +83,15 @@ public class Order {
 
     public void setPayments(List<Payment> payments) {
         this.payments = payments;
+    }
+
+    public void addPayment(Payment payment) {
+        payments.add(payment);
+        payment.getOrders().add(this);
+    }
+
+    public void removePayment(Payment payment) {
+        payments.remove(payment);
+        payment.getOrders().remove(this);
     }
 }
