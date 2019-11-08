@@ -70,7 +70,6 @@ public class CustomerServiceImpl implements CustomerService {
 
         List<Order> newCustomerOrders = customer.getOrders();
         List<Payment> newOrderPayments = new ArrayList<>();
-        //TODO figure out why payments aren't saving
         for (Order o : newCustomerOrders) {
             o.setCustomer(newCustomer);
             for (Payment p : o.getPayments()) {

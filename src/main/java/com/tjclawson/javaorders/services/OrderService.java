@@ -9,4 +9,10 @@ public interface OrderService {
     Order getOrderById(long ordnum);
 
     List<Order> findAll();
+
+    Order save(Order order);
+
+    Order update(Order order, long ordnum);
+
+    void delete(long ordnum);
 }

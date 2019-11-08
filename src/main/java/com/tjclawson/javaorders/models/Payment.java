@@ -17,9 +17,9 @@ public class Payment {
     @Column(nullable = false)
     private String type;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "orderspayments", joinColumns = @JoinColumn(name = "paymentid"), inverseJoinColumns = @JoinColumn(name = "ordnum"))
-    //@JsonIgnoreProperties("orders")
+    @JsonIgnoreProperties("orders")
     List<Order> orders = new ArrayList<>();
 
     public Payment() {

@@ -8,12 +8,19 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
+@JsonIgnoreProperties({"hasordamount", "hasadvanceamount"})
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long ordnum;
+
+    @Transient
+    public boolean hasordamount = false;
     private double ordamount;
+
+    @Transient
+    public boolean hasadvanceamount = false;
     private double advanceamount;
 
     @ManyToOne
@@ -23,7 +30,7 @@ public class Order {
 
     private String orderdescription;
 
-    @ManyToMany(mappedBy = "orders")
+    @ManyToMany(mappedBy = "orders", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("orders")
     private List<Payment> payments = new ArrayList<>();
 
@@ -50,6 +57,7 @@ public class Order {
     }
 
     public void setOrdamount(double ordamount) {
+        hasordamount = true;
         this.ordamount = ordamount;
     }
 
@@ -58,6 +66,7 @@ public class Order {
     }
 
     public void setAdvanceamount(double advanceamount) {
+        hasadvanceamount = true;
         this.advanceamount = advanceamount;
     }
 
