@@ -77,9 +77,9 @@ public class CustomerServiceImpl implements CustomerService {
                 newOrderPayments.add(payment);
             }
 
-            for (Payment p : newOrderPayments) {
-                o.addPayment(p);
-            }
+//            for (Payment p : newOrderPayments) {
+//                o.addPayment(p);
+//            }
         }
         newCustomer.setOrders(newCustomerOrders);
 

@@ -26,4 +26,9 @@ public class PaymentServiceImpl implements PaymentService {
     public Payment save(Payment payment) {
         return null;
     }
+
+    @Override
+    public void delete(long id) {
+        paymentRepository.deleteById(id);
+    }
 }
